@@ -1,0 +1,10 @@
+{% extends "anime/bases/bases.html" %}
+
+{% block body %}
+  <h1>Редактирование аниме "{{ anime.name }}"</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+  </form>
+{% endblock %}

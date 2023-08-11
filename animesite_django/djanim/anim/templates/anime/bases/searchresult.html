@@ -1,0 +1,13 @@
+{% extends "anime/bases/bases.html" %}
+{% block body %}
+<h1>Search Results:</h1>
+{% if animes %}
+    <ul>
+        {% for anime in animes %}
+            <li>{{ anime.name }} by {{ anime.author.username }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Results Found.</p>
+{% endif %}
+{% endblock %}

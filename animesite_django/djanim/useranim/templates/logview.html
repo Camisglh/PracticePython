@@ -1,0 +1,33 @@
+{% extends "anime/bases/bases.html" %}
+
+{% block body %}
+  <!-- Ваш контент страницы -->
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Ваши данные
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <p>Вы вошли в систему как {{ request.user.username }}.</p>
+          <h3>Список аниме:</h3>
+          <ul>
+            {% for a in request.user.anime_set.all %}
+              <li>
+                {{ a.name }} 
+                <a href="{% url 'anime_edit' pk=a.pk %}">Изменить</a>
+                <form action="" method="POST" class="d-inline">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                  <button type="submit" class="btn btn-link p-0 m-0" onclick="return confirm('Вы уверены, что хотите удалить этот элемент?')">Удалить</button>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
